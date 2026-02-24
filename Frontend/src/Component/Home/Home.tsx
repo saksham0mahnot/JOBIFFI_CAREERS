@@ -68,7 +68,6 @@ const Home: React.FC = () => {
             }, 5000);
         }
 
-        // Clear the interval when the component unmounts or if currentIndex/isPlaying changes 
         return () => {
             if (timer) clearInterval(timer);
         };
@@ -76,10 +75,8 @@ const Home: React.FC = () => {
 
     const currentSlide = slides[currentIndex];
 
-    // Calculate the width of the progress bar based on current index
     const progressWidth = `${((currentIndex + 1) / slides.length) * 100}%`;
 
-    // To simulate adjacent slides, we get prev and next colors
     const prevSlideData = slides[(currentIndex - 1 + slides.length) % slides.length];
     const nextSlideData = slides[(currentIndex + 1) % slides.length];
 
@@ -90,9 +87,7 @@ const Home: React.FC = () => {
                 {/* Left Card Placeholder */}
                 <div
                     onClick={prevSlide}
-                    className={`hidden md:block w-12 lg:w-24 ${prevSlideData.bgLight} rounded-2xl md:rounded-3xl shrink-0 cursor-pointer transition-colors duration-500`}
-                ></div>
-
+                    className={`hidden md:block w-12 lg:w-24 ${prevSlideData.bgLight} rounded-2xl md:rounded-3xl shrink-0 cursor-pointer transition-colors duration-500`}></div>
                 {/* Main Active Card */}
                 <div className={`flex-1 max-w-[1300px] bg-gradient-to-br ${currentSlide.gradient} rounded-2xl md:rounded-3xl p-8 md:p-20 flex flex-col justify-center relative overflow-hidden shadow-sm transition-all duration-700 ease-in-out`}>
                     {/* Soft glowing orbs for the mesh effect */}
@@ -116,8 +111,7 @@ const Home: React.FC = () => {
                 {/* Right Card Placeholder */}
                 <div
                     onClick={nextSlide}
-                    className={`hidden md:block w-12 lg:w-24 ${nextSlideData.bgLight} rounded-2xl md:rounded-3xl shrink-0 cursor-pointer transition-colors duration-500`}
-                ></div>
+                    className={`hidden md:block w-12 lg:w-24 ${nextSlideData.bgLight} rounded-2xl md:rounded-3xl shrink-0 cursor-pointer transition-colors duration-500`}></div>
             </div>
 
             {/* Carousel Controls */}
