@@ -34,7 +34,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 'l
 
                 {mode === 'login' && <Login onToggleMode={setMode} />}
                 {mode === 'register' && <Register onToggleMode={setMode} />}
-                {mode === 'employer' && <EmployerLogin onToggleMode={setMode} />}
+                {mode === 'employer' && <EmployerLogin />}
             </div>
         </div>
     );

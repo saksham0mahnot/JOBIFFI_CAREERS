@@ -1,10 +1,6 @@
 import React from 'react';
 
-interface EmployerLoginProps {
-    onToggleMode: (mode: 'login' | 'register') => void;
-}
-
-const EmployerLogin: React.FC<EmployerLoginProps> = ({ onToggleMode }) => {
+const EmployerLogin: React.FC = () => {
     return (
         <div className="p-8 pt-10">
             <h2 className="text-[28px] font-bold text-center text-[#0122c5] mb-2 tracking-tight">
