@@ -15,12 +15,11 @@ const Footer: React.FC = () => {
 
                 {/* Link Links */}
                 <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-3">
-                    <a href="#about" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">About</a>
-                    <a href="#cookie-policy" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">Cookie Policy</a>
-                    <a href="#privacy-policy" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">Privacy Policy</a>
-                    <a href="#california-privacy" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">Your California Privacy Choices</a>
-                    <a href="#user-agreement" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">User Agreement</a>
-                    <a href="#accessibility" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">Accessibility</a>
+                    <a href="https://jobiffi.com/about-us" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">About</a>
+                    <a href="https://jobiffi.com/privacy-policy" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">Privacy Policy</a>
+                    <a href="https://jobiffi.com/terms-conditions" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">Terms & conditions</a>
+                    <a href="#Help Center" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">Help Center</a>
+                    <a href="#Contact Us" className="no-underline text-[#5E5E5E] text-[12px] font-medium transition-all duration-200 hover:text-[#0a66c2]">Contact Us</a>
                 </div>
 
                 {/* Bottom Section */}

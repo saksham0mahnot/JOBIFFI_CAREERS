@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import outOfOfficeImage from '../../assets/outofoffice.svg';
+import JobSearchSection from './JobSearchSection';
 
 const slides = [
     {
@@ -102,7 +103,7 @@ const Home: React.FC = () => {
                         <p className="text-[16px] md:text-[18px] text-gray-700 mb-10 leading-relaxed font-medium max-w-xl">
                             {currentSlide.description}
                         </p>
-                        <button className="px-6 py-2.5 rounded-full border border-blue-200 text-blue-700 font-semibold text-[15px] hover:bg-white/50 transition-colors bg-white/20 backdrop-blur-md">
+                        <button className="outline-none focus:outline-none focus:ring-0 px-6 py-2.5 rounded-full border border-blue-200 text-blue-700 font-semibold text-[15px] hover:bg-white/50 transition-colors bg-white/20 backdrop-blur-md">
                             {currentSlide.buttonText}
                         </button>
                     </div>
@@ -147,48 +148,13 @@ const Home: React.FC = () => {
             </div>
 
             {/* adding a banner */}
-            <div className="w-full h-[300px] md:h-[400px] flex justify-center items-center mb-12 px-4">
+            <div className="w-full h-[400px] md:h-[500px] flex justify-center items-center mb-12 px-4">
                 <img src={outOfOfficeImage} alt="out of office" className="h-[75%] max-w-full object-contain" />
             </div>
 
-            {/* Intelligent Career Match Section */}
-            <div className="w-full flex justify-center pb-24 mt-4 bg-white">
-                <div className="w-full max-w-[850px] flex flex-col items-center px-6">
-                    <h2 className="text-2xl md:text-[28px] font-bold text-[#0122c5] mb-3 tracking-tight">
-                        AI-Powered Job Match
-                    </h2>
-                    <p className="text-[15px] md:text-[16px] text-gray-600 mb-8 text-center font-medium max-w-2xl">
-                        Upload your resume and let Jobiffi connect you with the best matching opportunities.
-                    </p>
-
-                    <div className="w-full flex flex-col items-start max-w-[700px]">
-                        <div className="w-full flex flex-col md:flex-row gap-3 md:gap-4 items-stretch">
-                            <div className="flex-1 relative group w-full">
-                                <input
-                                    type="file"
-                                    title="Upload Resume"
-                                    className="absolute inset-0 w-full h-full border border-gray-200 rounded-full opacity-0 cursor-pointer z-10"
-                                    accept=".doc,.docx,.pdf,.txt"
-                                />
-                                <div className="w-full h-[46px] border border-gray-200 rounded-full flex items-center px-4 text-gray-400 text-[14px] bg-white group-hover:border-gray-300 transition-colors">
-                                    Please upload file
-                                </div>
-                                {/* Desktop description text aligned strictly beneath the input */}
-                            </div>
-                            <button className="h-[46px] bg-[#0122c5] hover:bg-[#0c2445] text-white px-8 md:px-10 rounded-full text-[14px] md:text-[15px] transition-colors whitespace-nowrap w-full md:w-auto mt-2 md:mt-0 shadow-sm relative z-20">
-                                Upload File
-                            </button>
-
-                        </div>
-                        <p className="text-[11px] md:text-[12px] text-gray-500 mt-2 text-left hidden md:block tracking-tight">
-                            For best results, upload *.doc/*.docx/*.pdf/*.txt format files only (File size should be {"<"} 2MB)
-                        </p>
-                        {/* Mobile description text placed beneath the whole layout stack */}
-                        <p className="text-[11px] text-gray-500 mt-2 text-center w-full md:hidden tracking-tight">
-                            For best results, upload *.doc/*.docx/*.pdf/*.txt format files only (File size should be {"<"} 2MB)
-                        </p>
-                    </div>
-                </div>
+            {/* AI Search Section with Filters */}
+            <div id="jobs" className="w-full flex-1 flex flex-col bg-white overflow-hidden mt-4">
+                <JobSearchSection />
             </div>
         </div>
     );
