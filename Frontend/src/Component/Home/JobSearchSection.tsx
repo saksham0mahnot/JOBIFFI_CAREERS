@@ -405,7 +405,7 @@ const JobSearchSection = () => {
                                         onChange={(e) => { setQuery(e.target.value); setCurrentPage(1); }}
                                         className="text-black bg-white w-full h-[54px] pl-6 pr-12 rounded-full border border-gray-300 focus:outline-none focus:ring-0 focus:border-gray-300 shadow-sm text-[15px] placeholder-gray-500"
                                     />
-                                    <button className="bg-transparent absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#0122c5] focus:outline-none focus:ring-0 outline-none border-none">
+                                    <button className="bg-white absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#0122c5] focus:outline-none focus:ring-0 outline-none border-none">
                                         <FiSearch size={22} />
                                     </button>
                                 </div>
