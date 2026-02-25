@@ -4,9 +4,9 @@ import AuthModal from '../Auth/AuthModal';
 
 const Header: React.FC = () => {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-    const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
+    const [authMode, setAuthMode] = useState<'login' | 'register' | 'employer'>('login');
 
-    const openAuthModal = (mode: 'login' | 'register') => {
+    const openAuthModal = (mode: 'login' | 'register' | 'employer') => {
         setAuthMode(mode);
         setIsAuthModalOpen(true);
     };
@@ -14,9 +14,8 @@ const Header: React.FC = () => {
     return (
         <>
             <header className="w-full bg-white py-3 px-6 flex justify-between items-center shadow-sm font-sans border-b border-gray-200 sticky top-0 z-50">
-                {/* Left Section: Logo */}
                 <div className="flex items-center">
-                    <a href="/" className="inline-flex items-center gap-2">
+                    <a href="/" className="inline-flex items-center gap-2 transform origin-left transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)]">
                         <img src={logo} alt="Jobiffi Logo" className="h-[38px] object-contain" />
                         <span className="text-[#0122c5] font-bold text-[20px]">Careers</span>
                     </a>
@@ -46,9 +45,11 @@ const Header: React.FC = () => {
 
                         <div className="hidden md:block w-[1px] h-[24px] bg-gray-200 mx-1"></div>
 
-                        <a href="#employer-login" className="hidden md:flex text-gray-600 font-semibold text-[15px] hover:text-blue-600 transition-colors whitespace-nowrap">
+                        <button
+                            onClick={() => openAuthModal('employer')}
+                            className="hidden md:flex text-gray-600 bg-transparent p-0 border-none m-0 shadow-none font-semibold text-[15px] hover:text-blue-600 transition-colors whitespace-nowrap outline-none focus:outline-none focus:ring-0">
                             Employer Login
-                        </a>
+                        </button>
                     </div>
                 </div>
             </header>
