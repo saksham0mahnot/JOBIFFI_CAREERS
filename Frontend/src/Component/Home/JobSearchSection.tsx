@@ -527,7 +527,7 @@ const JobSearchSection = () => {
                                                     type="checkbox"
                                                     checked={selectedTypes.includes(type)}
                                                     onChange={() => toggleType(type)}
-                                                    className="outline-none focus:outline-none focus:ring-0 w-4 h-4 rounded-[3px] border-gray-300 text-[#0122c5] focus:ring-0 focus:outline-none"
+                                                    className="outline-none focus:outline-none focus:ring-0 w-4 h-4 rounded-[3px] border-gray-300 text-[#0122c5]"
                                                 />
                                                 <span className="text-[13px] text-gray-700 font-medium group-hover:text-black">{type}</span>
                                             </label>

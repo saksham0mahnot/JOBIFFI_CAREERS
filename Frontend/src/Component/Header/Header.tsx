@@ -35,7 +35,7 @@ const Header: React.FC = () => {
                     <div className="flex items-center gap-4">
                         <button
                             onClick={() => openAuthModal('login')}
-                            className="text-white md:bg-white bg-white m-0 !text-blue-700 font-semibold text-[15px] border border-blue-700 px-5 py-2 !rounded-full hover:!bg-blue-800 hover:!border-blue-800 hover:!text-white transition-colors focus:outline-none focus:ring-0 outline-none shadow-none">
+                            className="md:bg-white bg-white m-0 !text-blue-700 font-semibold text-[15px] border border-blue-700 px-5 py-2 !rounded-full hover:!bg-blue-800 hover:!border-blue-800 hover:!text-white transition-colors focus:outline-none focus:ring-0 outline-none shadow-none">
                             Login
                         </button>
                         <button
