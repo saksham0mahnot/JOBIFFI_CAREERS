@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiZap, FiUsers } from 'react-icons/fi';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import outOfOfficeImage from '../../assets/outofoffice.svg';
 import JobSearchSection from './JobSearchSection';
@@ -148,8 +148,54 @@ const Home: React.FC = () => {
             </div>
 
             {/* adding a banner */}
-            <div className="w-full h-[400px] md:h-[500px] flex justify-center items-center mb-12 px-4">
-                <img src={outOfOfficeImage} alt="out of office" className="h-[75%] max-w-full object-contain" />
+            <div className="w-full max-w-7xl mx-auto mb-20 px-4 md:px-8 mt-12">
+                <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-[2rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 lg:gap-20 shadow-sm border border-blue-100/50">
+                    <div className="flex-1 text-left space-y-6">
+                        <span className="inline-block text-[#0122c5] bg-blue-100/70 px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider shadow-sm border border-blue-200">
+                            Our Culture
+                        </span>
+
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                            Life at <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0122c5] to-purple-600">Jobiffi</span>
+                        </h2>
+
+                        <p className="text-xl md:text-2xl text-gray-800 font-semibold tracking-wide border-l-4 border-[#0122c5] pl-5 py-1">
+                            We believe work should be exciting, meaningful, and growth-oriented.
+                        </p>
+
+                        <div className="space-y-6 pt-4">
+                            <div className="flex items-start gap-4">
+                                <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-gray-100 text-[#0122c5]">
+                                    <FiZap size={22} />
+                                </div>
+                                <p className="text-gray-600 leading-relaxed text-[16px] md:text-[18px] pt-1 md:pt-1.5">
+                                    From brainstorming sessions to product launches, every day is an opportunity to build something impactful.
+                                </p>
+                            </div>
+
+                            <div className="flex items-start gap-4">
+                                <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-gray-100 text-[#0122c5]">
+                                    <FiUsers size={22} />
+                                </div>
+                                <p className="text-gray-600 leading-relaxed text-[16px] md:text-[18px] pt-1 md:pt-1.5">
+                                    Team outings, celebration days, open feedback culture, and innovation sprints are part of our DNA.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex-1 flex justify-center items-center w-full relative group">
+                        {/* Decorative glowing background blob */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 transition-opacity duration-700 group-hover:opacity-60"></div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-purple-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 transition-opacity duration-700 group-hover:opacity-60"></div>
+
+                        <img
+                            src={outOfOfficeImage}
+                            alt="Life at Jobiffi"
+                            className="w-full max-w-[500px] object-contain relative z-10 drop-shadow-xl transition-transform duration-700 ease-in-out group-hover:scale-105"
+                        />
+                    </div>
+                </div>
             </div>
 
             {/* AI Search Section with Filters */}
