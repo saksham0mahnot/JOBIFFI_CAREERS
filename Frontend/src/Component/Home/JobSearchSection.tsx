@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { FiSearch, FiSliders, FiPlus, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiSearch, FiSliders, FiChevronLeft, FiChevronRight, FiChevronDown, FiChevronUp, FiX } from 'react-icons/fi';
 import { BsBookmark } from 'react-icons/bs';
 
 const JOBS_DATA = [
@@ -7,7 +7,7 @@ const JOBS_DATA = [
         id: 1,
         title: "Software Engineer, Machine Learning",
         location: "Sunnyvale, CA • 15 locations",
-        teams: ["Advertising Technology", "Engineering"],
+        domain: ["Advertising Technology", "Engineering"],
         technologies: ["React", "Python"],
         type: "Full time employment",
         tags: ["Multiple Locations", "Advertising Technology", "AI Infrastructure", "AI Research", "AR/VR", "Artificial Intelligence", "Data & Analytics"],
@@ -17,7 +17,7 @@ const JOBS_DATA = [
         id: 2,
         title: "Software Engineer, Infrastructure",
         location: "Sunnyvale, CA • 10 locations",
-        teams: ["Software Engineering", "Engineering"],
+        domain: ["Software Engineering", "Engineering"],
         technologies: ["AWS", "Node.js"],
         type: "Full time employment",
         tags: ["Multiple Locations", "Software Engineering", "Engineering"],
@@ -27,7 +27,7 @@ const JOBS_DATA = [
         id: 3,
         title: "Product Design Engineer",
         location: "Sunnyvale, CA • 1 locations",
-        teams: ["AR/VR", "Engineering"],
+        domain: ["AR/VR", "Engineering"],
         technologies: ["Figma", "Prototyping"],
         type: "Full time employment",
         tags: ["Multiple Locations", "AR/VR", "Engineering", "Hardware"],
@@ -37,7 +37,7 @@ const JOBS_DATA = [
         id: 4,
         title: "Clients Solution Manager, Apps and Games, Greater China",
         location: "Hong Kong",
-        teams: ["Sales & Marketing"],
+        domain: ["Sales & Marketing"],
         technologies: [],
         type: "Full time employment",
         tags: ["Hong Kong", "Sales & Marketing", "Sales"],
@@ -47,7 +47,7 @@ const JOBS_DATA = [
         id: 5,
         title: "ASIC Engineer, Design Verification",
         location: "Bangalore, India",
-        teams: ["Infrastructure", "Engineering"],
+        domain: ["Infrastructure", "Engineering"],
         technologies: ["Verilog", "C++"],
         type: "Full time employment",
         tags: ["Bangalore, India", "Infrastructure", "Engineering", "Hardware"],
@@ -57,7 +57,7 @@ const JOBS_DATA = [
         id: 6,
         title: "Communications Manager",
         location: "New York, NY",
-        teams: ["Communications & Public Policy"],
+        domain: ["Communications & Public Policy"],
         technologies: [],
         type: "Full time employment",
         tags: ["New York, NY", "Communications & Public Policy", "Corporate Communications"],
@@ -67,7 +67,7 @@ const JOBS_DATA = [
         id: 7,
         title: "Finance and Business Operations Manager, Jobiffi",
         location: "Menlo Park, CA +1 locations",
-        teams: ["Legal, Finance, Facilities & Admin", "Finance"],
+        domain: ["Legal, Finance, Facilities & Admin", "Finance"],
         technologies: [],
         type: "Full time employment",
         tags: ["Multiple Locations", "Legal, Finance, Facilities & Admin", "Finance"],
@@ -78,7 +78,7 @@ const JOBS_DATA = [
         id: 8,
         title: "Frontend Developer (React)",
         location: "Remote • India",
-        teams: ["Engineering"],
+        domain: ["Engineering"],
         technologies: ["React", "TypeScript", "Tailwind"],
         type: "Full time employment",
         tags: ["Remote", "Frontend", "Engineering"],
@@ -88,7 +88,7 @@ const JOBS_DATA = [
         id: 9,
         title: "Backend Developer (Node.js)",
         location: "Pune, India",
-        teams: ["Engineering"],
+        domain: ["Engineering"],
         technologies: ["Node.js", "Express", "MongoDB"],
         type: "Full time employment",
         tags: ["Backend", "Engineering", "API Development"],
@@ -98,7 +98,7 @@ const JOBS_DATA = [
         id: 10,
         title: "DevOps Engineer",
         location: "Hyderabad, India",
-        teams: ["Infrastructure", "Engineering"],
+        domain: ["Infrastructure", "Engineering"],
         technologies: ["AWS", "Docker", "Kubernetes"],
         type: "Full time employment",
         tags: ["DevOps", "Cloud", "Engineering"],
@@ -108,7 +108,7 @@ const JOBS_DATA = [
         id: 11,
         title: "Mobile App Developer (React Native)",
         location: "Remote",
-        teams: ["Engineering"],
+        domain: ["Engineering"],
         technologies: ["React Native", "Firebase"],
         type: "Full time employment",
         tags: ["Mobile", "Cross Platform", "Engineering"],
@@ -118,7 +118,7 @@ const JOBS_DATA = [
         id: 12,
         title: "UI/UX Designer",
         location: "Bangalore, India",
-        teams: ["Design"],
+        domain: ["Design"],
         technologies: ["Figma", "Adobe XD"],
         type: "Full time employment",
         tags: ["Design", "Product Design"],
@@ -128,7 +128,7 @@ const JOBS_DATA = [
         id: 13,
         title: "Data Analyst",
         location: "Mumbai, India",
-        teams: ["Data & Analytics"],
+        domain: ["Data & Analytics"],
         technologies: ["SQL", "Python", "Power BI"],
         type: "Full time employment",
         tags: ["Analytics", "Business Intelligence"],
@@ -138,7 +138,7 @@ const JOBS_DATA = [
         id: 14,
         title: "AI Research Engineer",
         location: "Remote • Global",
-        teams: ["Artificial Intelligence"],
+        domain: ["Artificial Intelligence"],
         technologies: ["Python", "PyTorch", "TensorFlow"],
         type: "Full time employment",
         tags: ["AI Research", "Machine Learning"],
@@ -148,7 +148,7 @@ const JOBS_DATA = [
         id: 15,
         title: "Product Manager",
         location: "Delhi, India",
-        teams: ["Product"],
+        domain: ["Product"],
         technologies: [],
         type: "Full time employment",
         tags: ["Product Management", "Strategy"],
@@ -158,7 +158,7 @@ const JOBS_DATA = [
         id: 16,
         title: "Technical Recruiter",
         location: "Remote • India",
-        teams: ["Human Resources"],
+        domain: ["Human Resources"],
         technologies: [],
         type: "Full time employment",
         tags: ["Recruitment", "Talent Acquisition"],
@@ -168,7 +168,7 @@ const JOBS_DATA = [
         id: 17,
         title: "Content Marketing Specialist",
         location: "Remote",
-        teams: ["Marketing"],
+        domain: ["Marketing"],
         technologies: ["SEO", "Google Analytics"],
         type: "Full time employment",
         tags: ["Content", "Marketing"],
@@ -178,7 +178,7 @@ const JOBS_DATA = [
         id: 18,
         title: "Cybersecurity Engineer",
         location: "Chennai, India",
-        teams: ["Security", "Engineering"],
+        domain: ["Security", "Engineering"],
         technologies: ["SIEM", "Python"],
         type: "Full time employment",
         tags: ["Security", "Infrastructure"],
@@ -188,7 +188,7 @@ const JOBS_DATA = [
         id: 19,
         title: "QA Automation Engineer",
         location: "Ahmedabad, India",
-        teams: ["Engineering"],
+        domain: ["Engineering"],
         technologies: ["Selenium", "Cypress"],
         type: "Full time employment",
         tags: ["QA", "Automation"],
@@ -198,7 +198,7 @@ const JOBS_DATA = [
         id: 20,
         title: "Cloud Solutions Architect",
         location: "Remote • US",
-        teams: ["Cloud & Infrastructure"],
+        domain: ["Cloud & Infrastructure"],
         technologies: ["AWS", "Azure"],
         type: "Full time employment",
         tags: ["Cloud", "Architecture"],
@@ -208,7 +208,7 @@ const JOBS_DATA = [
         id: 21,
         title: "Business Development Executive",
         location: "Jaipur, India",
-        teams: ["Sales"],
+        domain: ["Sales"],
         technologies: [],
         type: "Full time employment",
         tags: ["Sales", "Business Growth"],
@@ -218,7 +218,7 @@ const JOBS_DATA = [
         id: 22,
         title: "Customer Success Manager",
         location: "Remote",
-        teams: ["Customer Experience"],
+        domain: ["Customer Experience"],
         technologies: ["CRM"],
         type: "Full time employment",
         tags: ["Customer Support", "Operations"],
@@ -228,7 +228,7 @@ const JOBS_DATA = [
         id: 23,
         title: "Graphic Designer",
         location: "Indore, India",
-        teams: ["Design"],
+        domain: ["Design"],
         technologies: ["Photoshop", "Illustrator"],
         type: "Full time employment",
         tags: ["Creative", "Branding"],
@@ -238,7 +238,7 @@ const JOBS_DATA = [
         id: 24,
         title: "Blockchain Developer",
         location: "Remote • Global",
-        teams: ["Engineering"],
+        domain: ["Engineering"],
         technologies: ["Solidity", "Web3.js"],
         type: "Full time employment",
         tags: ["Blockchain", "Web3"],
@@ -248,7 +248,7 @@ const JOBS_DATA = [
         id: 25,
         title: "HR Operations Executive",
         location: "Udaipur, India",
-        teams: ["Human Resources"],
+        domain: ["Human Resources"],
         technologies: [],
         type: "Full time employment",
         tags: ["HR", "Operations"],
@@ -258,7 +258,7 @@ const JOBS_DATA = [
         id: 26,
         title: "Intern - Software Development",
         location: "Remote • India",
-        teams: ["Engineering"],
+        domain: ["Engineering"],
         technologies: ["JavaScript", "Git"],
         type: "Internship",
         tags: ["Internship", "Fresher Friendly"],
@@ -268,7 +268,7 @@ const JOBS_DATA = [
         id: 27,
         title: "Growth Hacker",
         location: "Remote",
-        teams: ["Marketing"],
+        domain: ["Marketing"],
         technologies: ["SEO", "Paid Ads"],
         type: "Full time employment",
         tags: ["Growth", "Marketing"],
@@ -278,7 +278,7 @@ const JOBS_DATA = [
         id: 28,
         title: "System Administrator",
         location: "Noida, India",
-        teams: ["IT Support"],
+        domain: ["IT Support"],
         technologies: ["Linux", "Networking"],
         type: "Full time employment",
         tags: ["IT", "Infrastructure"],
@@ -288,7 +288,7 @@ const JOBS_DATA = [
         id: 29,
         title: "Technical Support Engineer",
         location: "Remote • India",
-        teams: ["Support"],
+        domain: ["Support"],
         technologies: ["Zendesk"],
         type: "Full time employment",
         tags: ["Support", "Customer Experience"],
@@ -298,7 +298,7 @@ const JOBS_DATA = [
         id: 30,
         title: "Chief Technology Officer (CTO)",
         location: "Remote • Global",
-        teams: ["Leadership"],
+        domain: ["Leadership"],
         technologies: [],
         type: "Full time employment",
         tags: ["Executive", "Leadership"],
@@ -311,20 +311,25 @@ const JobSearchSection = () => {
     const [showFilters, setShowFilters] = useState(true);
     const [sortBy, setSortBy] = useState("Relevance");
 
+    const [isSortExpanded, setIsSortExpanded] = useState(true);
+    const [isDomainExpanded, setIsDomainExpanded] = useState(true);
+    const [isTypeExpanded, setIsTypeExpanded] = useState(true);
+    const [isLocationExpanded, setIsLocationExpanded] = useState(true);
+
     const [currentPage, setCurrentPage] = useState(1);
     const JOBS_PER_PAGE = 10;
 
     // Filters State
-    const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
+    const [selectedDomain, setSelectedDomain] = useState<string[]>([]);
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
     const [locationQuery, setLocationQuery] = useState("");
 
     // Derive filters dynamically from data
-    const allTeams = useMemo(() => Array.from(new Set(JOBS_DATA.flatMap(job => job.teams).filter(Boolean))), []);
+    const allDomain = useMemo(() => Array.from(new Set(JOBS_DATA.flatMap(job => job.domain).filter(Boolean))), []);
     const allTypes = useMemo(() => Array.from(new Set(JOBS_DATA.map(job => job.type).filter(Boolean))), []);
 
     const toggleTeam = (team: string) => {
-        setSelectedTeams(prev => prev.includes(team) ? prev.filter(t => t !== team) : [...prev, team]);
+        setSelectedDomain(prev => prev.includes(team) ? prev.filter(t => t !== team) : [...prev, team]);
         setCurrentPage(1);
     };
 
@@ -334,7 +339,7 @@ const JobSearchSection = () => {
     };
 
     const clearFilters = () => {
-        setSelectedTeams([]);
+        setSelectedDomain([]);
         setSelectedTypes([]);
         setLocationQuery("");
         setCurrentPage(1);
@@ -349,8 +354,8 @@ const JobSearchSection = () => {
             if (query && !job.title.toLowerCase().includes(query.toLowerCase()) && !job.tags.some(t => t.toLowerCase().includes(query.toLowerCase()))) {
                 return false;
             }
-            // Teams
-            if (selectedTeams.length > 0 && !selectedTeams.some(team => job.teams.includes(team))) return false;
+            // Domain
+            if (selectedDomain.length > 0 && !selectedDomain.some(team => job.domain.includes(team))) return false;
             // Types
             if (selectedTypes.length > 0 && !selectedTypes.includes(job.type)) return false;
             // Location
@@ -358,7 +363,7 @@ const JobSearchSection = () => {
 
             return true;
         });
-    }, [query, selectedTeams, selectedTypes, locationQuery]);
+    }, [query, selectedDomain, selectedTypes, locationQuery]);
 
     const totalPages = Math.max(1, Math.ceil(filteredJobs.length / JOBS_PER_PAGE));
     const paginatedJobs = filteredJobs.slice((currentPage - 1) * JOBS_PER_PAGE, currentPage * JOBS_PER_PAGE);
@@ -456,98 +461,159 @@ const JobSearchSection = () => {
                     <span className="text-[13px] text-gray-600 font-medium">{filteredJobs.length} Items</span>
                 </div >
 
-                <div className="flex flex-col md:flex-row gap-10">
+                <div className="bg-blue-50 p-5 rounded-2xl border-dotted border-2 border-gray-300 flex flex-col md:flex-row gap-10">
                     {/* Left Sidebar */}
                     {showFilters && (
-                        <div className="w-full md:w-[280px] shrink-0 flex flex-col gap-8">
+                        <div className="w-full md:w-[280px] shrink-0 flex flex-col gap-4">
 
-                            <button className="outline-none focus:outline-none focus:ring-0 bg-white flex items-center gap-2 text-gray-500 hover:text-gray-800 text-[13px] font-medium transition-colors">
-                                <span className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center"><FiPlus size={12} /></span>
-                                Save this search
-                            </button>
-
-                            {/* Sort by */}
-                            <div>
-                                <h3 className="text-[14px] font-bold text-gray-900 mb-4">Sort by</h3>
-                                <div className="flex flex-col gap-3">
-                                    <label className="flex items-center gap-3 cursor-pointer group">
-                                        <input
-                                            type="radio"
-                                            name="sort"
-                                            checked={sortBy === 'Relevance'}
-                                            onChange={() => setSortBy('Relevance')}
-                                            className="w-4 h-4 text-[#0122c5] border-gray-300 focus:outline-none focus:ring-0"
-                                        />
-                                        <span className="text-[14px] text-gray-800 font-medium group-hover:text-black">Relevance</span>
-                                    </label>
-                                    <label className="flex items-center gap-3 cursor-pointer group">
-                                        <input
-                                            type="radio"
-                                            name="sort"
-                                            checked={sortBy === 'Newest'}
-                                            onChange={() => setSortBy('Newest')}
-                                            className="w-4 h-4 text-[#0122c5] border-gray-300 focus:outline-none focus:ring-0"
-                                        />
-                                        <span className="text-[14px] text-gray-800 font-medium group-hover:text-black">Newest</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <hr className="border-gray-100" />
-
-                            {/* Teams */}
-                            {allTeams.length > 0 && (
-                                <div>
-                                    <h3 className="text-[14px] font-bold text-gray-900 mb-4">Teams</h3>
+                            {/* Active Filters Summary */}
+                            {(selectedDomain.length > 0 || selectedTypes.length > 0 || locationQuery.trim() !== "") && (
+                                <div className="mb-2">
+                                    <h3 className="text-[13px] font-bold text-gray-900 mb-3 uppercase tracking-wider">Applied Filters</h3>
                                     <div className="flex flex-wrap gap-2">
-                                        {allTeams.map(team => (
-                                            <button
-                                                key={team}
-                                                onClick={() => toggleTeam(team)}
-                                                className={`px-3 py-1.5 rounded-[4px] text-[12px] focus:outline-none transition-colors ${selectedTeams.includes(team)
-                                                    ? 'bg-[#0122c5] text-white font-bold shadow-none border-none outline-none'
-                                                    : 'font-medium border border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:text-[#0122c5] hover:bg-white'
-                                                    }`}
-                                            >
+                                        {selectedDomain.map(team => (
+                                            <span key={team} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0122c5]/10 text-[#0122c5] text-[12px] font-bold rounded-[6px] border border-[#0122c5]/20">
                                                 {team}
-                                            </button>
+                                                <button onClick={() => toggleTeam(team)} className="bg-white text-[#0122c5] hover:text-gray-600 focus:outline-none focus:ring-0 p-0 hover:bg-transparent">
+                                                    <FiX size={14} />
+                                                </button>
+                                            </span>
                                         ))}
+                                        {selectedTypes.map(type => (
+                                            <span key={type} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0122c5]/10 text-[#0122c5] text-[12px] font-bold rounded-[6px] border border-[#0122c5]/20">
+                                                {type}
+                                                <button onClick={() => toggleType(type)} className="bg-white text-[#0122c5] hover:text-gray-600 focus:outline-none focus:ring-0 p-0 hover:bg-transparent">
+                                                    <FiX size={14} />
+                                                </button>
+                                            </span>
+                                        ))}
+                                        {locationQuery.trim() !== "" && (
+                                            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0122c5]/10 text-[#0122c5] text-[12px] font-bold rounded-[6px] border border-[#0122c5]/20">
+                                                <span className="font-normal text-gray-600">Location:</span> {locationQuery}
+                                                <button onClick={() => { setLocationQuery(""); setCurrentPage(1); }} className="bg-white text-[#0122c5] hover:text-gray-600 focus:outline-none focus:ring-0 p-0 hover:bg-transparent">
+                                                    <FiX size={14} />
+                                                </button>
+                                            </span>
+                                        )}
                                     </div>
+                                    <hr className="border-gray-100 mt-6" />
                                 </div>
                             )}
 
-                            {/* Employment type */}
-                            {allTypes.length > 0 && (
-                                <div>
-                                    <h3 className="text-[14px] font-bold text-gray-900 mb-4">Employment type</h3>
-                                    <div className="flex flex-col gap-3 ">
-                                        {allTypes.map(type => (
-                                            <label key={type} className="flex items-center gap-3 cursor-pointer group">
+                            <div className="flex flex-col w-full">
+                                {/* Sort by */}
+                                <div className="py-5 border-b border-blue-100">
+                                    <button
+                                        onClick={() => setIsSortExpanded(!isSortExpanded)}
+                                        className="w-full bg-transparent border-none outline-none focus:outline-none p-0 flex items-center justify-between cursor-pointer group"
+                                    >
+                                        <h3 className="text-[15px] font-bold text-gray-800">Sort by</h3>
+                                        {isSortExpanded ? <FiChevronUp className="text-gray-600 transition-transform group-hover:text-black" size={20} /> : <FiChevronDown className="text-gray-600 transition-transform group-hover:text-black" size={20} />}
+                                    </button>
+                                    {isSortExpanded && (
+                                        <div className="flex flex-col gap-3 mt-5 animate-in fade-in slide-in-from-top-1 duration-200">
+                                            <label className="flex items-center gap-3 cursor-pointer group">
                                                 <input
-                                                    type="checkbox"
-                                                    checked={selectedTypes.includes(type)}
-                                                    onChange={() => toggleType(type)}
-                                                    className="outline-none focus:outline-none focus:ring-0 w-4 h-4 rounded-[3px] border-gray-300 text-[#0122c5]"
+                                                    type="radio"
+                                                    name="sort"
+                                                    checked={sortBy === 'Relevance'}
+                                                    onChange={() => setSortBy('Relevance')}
+                                                    className="w-4 h-4 text-[#0122c5] border-blue-100 focus:outline-none focus:ring-0"
                                                 />
-                                                <span className="text-[13px] text-gray-700 font-medium group-hover:text-black">{type}</span>
+                                                <span className="text-[14px] text-gray-800 font-medium group-hover:text-black">Relevance</span>
                                             </label>
-                                        ))}
-                                    </div>
+                                            <label className="flex items-center gap-3 cursor-pointer group">
+                                                <input
+                                                    type="radio"
+                                                    name="sort"
+                                                    checked={sortBy === 'Newest'}
+                                                    onChange={() => setSortBy('Newest')}
+                                                    className="w-4 h-4 text-[#0122c5] border-blue-100 focus:outline-none focus:ring-0"
+                                                />
+                                                <span className="text-[14px] text-gray-800 font-medium group-hover:text-black">Newest</span>
+                                            </label>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
 
-                            {/* Location */}
-                            <div>
-                                <h3 className="text-[14px] font-bold text-gray-900 mb-4">Location</h3>
-                                <div className="relative">
-                                    <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-                                    <input
-                                        type="text"
-                                        placeholder="Search location"
-                                        value={locationQuery}
-                                        onChange={(e) => { setLocationQuery(e.target.value); setCurrentPage(1); }}
-                                        className="bg-white text-gray-500 w-full h-[40px] pl-9 pr-3 rounded border border-gray-300 text-[13px] focus:outline-none focus:ring-0 focus:border-gray-300"
-                                    />
+                                {/* Domain */}
+                                {allDomain.length > 0 && (
+                                    <div className="py-5 border-b border-blue-100">
+                                        <button
+                                            onClick={() => setIsDomainExpanded(!isDomainExpanded)}
+                                            className="w-full bg-transparent border-none outline-none focus:outline-none p-0 flex items-center justify-between cursor-pointer group"
+                                        >
+                                            <h3 className="text-[15px] font-bold text-gray-800">Domain</h3>
+                                            {isDomainExpanded ? <FiChevronUp className="text-gray-600 transition-transform group-hover:text-black" size={20} /> : <FiChevronDown className="text-gray-600 transition-transform group-hover:text-black" size={20} />}
+                                        </button>
+                                        {isDomainExpanded && (
+                                            <div className="flex flex-wrap gap-2 mt-5 animate-in fade-in slide-in-from-top-1 duration-200">
+                                                {allDomain.map(team => (
+                                                    <button
+                                                        key={team}
+                                                        onClick={() => toggleTeam(team)}
+                                                        className={`px-3 py-1.5 rounded-[4px] text-[12px] focus:outline-none transition-colors ${selectedDomain.includes(team)
+                                                            ? 'bg-[#0122c5] text-white font-bold shadow-none border-none outline-none'
+                                                            : 'font-medium border border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:text-[#0122c5] hover:bg-white'
+                                                            }`}
+                                                    >
+                                                        {team}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Employment type */}
+                                {allTypes.length > 0 && (
+                                    <div className="py-5 border-b border-blue-100">
+                                        <button
+                                            onClick={() => setIsTypeExpanded(!isTypeExpanded)}
+                                            className="w-full bg-transparent border-none outline-none focus:outline-none p-0 flex items-center justify-between cursor-pointer group"
+                                        >
+                                            <h3 className="text-[15px] font-bold text-gray-800">Employment type</h3>
+                                            {isTypeExpanded ? <FiChevronUp className="text-gray-600 transition-transform group-hover:text-black" size={20} /> : <FiChevronDown className="text-gray-600 transition-transform group-hover:text-black" size={20} />}
+                                        </button>
+                                        {isTypeExpanded && (
+                                            <div className="flex flex-col gap-3 mt-5 animate-in fade-in slide-in-from-top-1 duration-200">
+                                                {allTypes.map(type => (
+                                                    <label key={type} className="flex items-center gap-3 cursor-pointer group">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={selectedTypes.includes(type)}
+                                                            onChange={() => toggleType(type)}
+                                                            className="outline-none focus:outline-none focus:ring-0 w-4 h-4 rounded-[3px] border-gray-300 text-[#0122c5]"
+                                                        />
+                                                        <span className="text-[13px] text-gray-700 font-medium group-hover:text-black">{type}</span>
+                                                    </label>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Location */}
+                                <div className="py-5 border-b border-blue-100">
+                                    <button
+                                        onClick={() => setIsLocationExpanded(!isLocationExpanded)}
+                                        className="w-full bg-transparent border-none outline-none focus:outline-none p-0 flex items-center justify-between cursor-pointer group"
+                                    >
+                                        <h3 className="text-[15px] font-bold text-gray-800">Location</h3>
+                                        {isLocationExpanded ? <FiChevronUp className="text-gray-600 transition-transform group-hover:text-black" size={20} /> : <FiChevronDown className="text-gray-600 transition-transform group-hover:text-black" size={20} />}
+                                    </button>
+                                    {isLocationExpanded && (
+                                        <div className="relative mt-5 animate-in fade-in slide-in-from-top-1 duration-200">
+                                            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+                                            <input
+                                                type="text"
+                                                placeholder="Search location"
+                                                value={locationQuery}
+                                                onChange={(e) => { setLocationQuery(e.target.value); setCurrentPage(1); }}
+                                                className="bg-white text-gray-500 w-full h-[40px] pl-9 pr-3 rounded border border-gray-300 text-[13px] focus:outline-none focus:ring-0 focus:border-gray-300"
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -571,7 +637,7 @@ const JobSearchSection = () => {
                         {featuredJobs.length > 0 && (
                             <div>
                                 <h2 className="text-[20px] text-[#0122c5] uppercase font-bold mb-6">Featured Jobs</h2>
-                                <div className="flex flex-col gap-8">
+                                <div className="flex flex-col gap-5">
                                     {featuredJobs.map(job => <JobCard key={job.id} job={job} />)}
                                 </div>
                             </div>
@@ -580,7 +646,7 @@ const JobSearchSection = () => {
                         {regularJobs.length > 0 && (
                             <div>
                                 <h2 className="text-[20px] text-[#0122c5] uppercase font-bold mb-6">{featuredJobs.length > 0 ? 'All Jobs' : 'Jobs'}</h2>
-                                <div className="flex flex-col gap-8">
+                                <div className="flex flex-col gap-5">
                                     {regularJobs.map(job => <JobCard key={job.id} job={job} />)}
                                 </div>
                             </div>
@@ -648,7 +714,7 @@ type JobType = typeof JOBS_DATA[0];
 
 const JobCard = ({ job }: { job: JobType }) => {
     return (
-        <div className="flex items-start justify-between group">
+        <div className="flex items-start justify-between group bg-white border border-gray-200 p-6 rounded-2xl hover:shadow-lg focus-within:border-[#0122c5] focus-within:shadow-lg transition-all duration-300 cursor-pointer">
             <div className="flex-1 pr-6">
                 <h3 className="text-[16px] font-bold text-gray-900 mb-1 leading-tight cursor-pointer hover:underline">
                     {job.title}
@@ -656,7 +722,7 @@ const JobCard = ({ job }: { job: JobType }) => {
                 <div className="text-[13px] text-gray-600 mb-3 flex flex-wrap items-center gap-2">
                     <span>{job.location}</span>
                     <span className="text-gray-400 text-[10px]">•</span>
-                    <span>{job.teams.join(', ')}</span>
+                    <span>{job.domain.join(', ')}</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                     {job.tags.map((tag: string, idx: number) => (
@@ -666,9 +732,14 @@ const JobCard = ({ job }: { job: JobType }) => {
                     ))}
                 </div>
             </div>
-            <button className="outline-none focus:outline-none focus:ring-0 bg-blue-100 text-gray-400 hover:text-gray-900 transition-colors p-2 shrink-0 border border-transparent rounded-full hover:border-gray-200 hover:bg-gray-50">
-                <BsBookmark size={20} />
-            </button>
+            <div className="flex flex-col items-end justify-between self-stretch shrink-0 pl-4 gap-4">
+                <button className="outline-none focus:outline-none focus:ring-0 text-gray-400 hover:text-[#0122c5] transition-colors p-2 rounded-full hover:bg-blue-50">
+                    <BsBookmark size={20} />
+                </button>
+                <a href="#" className="inline-block bg-white text-[#0122c5] border border-[#0122c5] hover:bg-[#0122c5] hover:text-white text-[13px] font-semibold px-6 py-2 rounded-full transition-colors whitespace-nowrap shadow-sm hover:shadow-md">
+                    Apply
+                </a>
+            </div>
         </div>
     );
 };
