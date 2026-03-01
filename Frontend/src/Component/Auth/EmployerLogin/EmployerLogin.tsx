@@ -25,7 +25,7 @@ const EmployerLogin: React.FC = () => {
 
         setLoading(true);
         try {
-            const response = await api.post('/auth/login-recruiter', formData);
+            const response = await api.post('/auth/employee/login', formData);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             toast.success('Employer Logged in successfully!');

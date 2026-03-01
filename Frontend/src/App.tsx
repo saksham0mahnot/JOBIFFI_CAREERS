@@ -5,6 +5,7 @@ import Home from './Component/Home/Home'
 import EmployeeDashboard from './Component/Dashboard/EmployeeDashboard'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import SocialAuthSuccess from './Component/Auth/SocialAuthSuccess'
 
 // Protected Route Component
 const ProtectedRoute = ({ children, role }: { children: React.ReactNode, role: string }) => {
@@ -28,6 +29,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/jobs" element={<Home />} />
+            <Route path="/social-auth-success" element={<SocialAuthSuccess />} />
             <Route
               path="/employee/dashboard"
               element={

@@ -59,7 +59,7 @@ exports.getMyJobs = asyncHandler(async (req, res) => {
 // @route   POST /api/jobs
 // @access  Private (Recruiter)
 exports.createJob = asyncHandler(async (req, res) => {
-    const { title, company, location, description, salary, jobType, featured } = req.body;
+    const { title, company, location, description, salary, jobType, featured, refCode } = req.body;
 
     const job = new Job({
         title,
@@ -69,6 +69,7 @@ exports.createJob = asyncHandler(async (req, res) => {
         salary,
         jobType,
         featured,
+        refCode,
         postedBy: req.user.id
     });
 

@@ -71,11 +71,17 @@ const Register: React.FC<RegisterProps> = ({ onToggleMode }) => {
             </p>
 
             <div className="w-full flex flex-col gap-3 mb-6">
-                <button className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 rounded-full transition-colors shadow-sm focus:outline-none focus:ring-0 text-[15px]">
+                <button
+                    onClick={() => window.location.href = `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/api/auth/google`}
+                    className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 rounded-full transition-colors shadow-sm focus:outline-none focus:ring-0 text-[15px]"
+                >
                     <FcGoogle size={22} />
                     Sign up with Google
                 </button>
-                <button className="w-full flex items-center justify-center gap-3 bg-[#0A66C2] border border-transparent hover:bg-[#004182] text-white font-semibold py-3 rounded-full transition-colors shadow-sm focus:outline-none focus:ring-0 text-[15px] hover:border-transparent">
+                <button
+                    onClick={() => window.location.href = `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/api/auth/linkedin`}
+                    className="w-full flex items-center justify-center gap-3 bg-[#0A66C2] border border-transparent hover:bg-[#004182] text-white font-semibold py-3 rounded-full transition-colors shadow-sm focus:outline-none focus:ring-0 text-[15px] hover:border-transparent"
+                >
                     <FaLinkedin size={22} />
                     Sign up with LinkedIn
                 </button>

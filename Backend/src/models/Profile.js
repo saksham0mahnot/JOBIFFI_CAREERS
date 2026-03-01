@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const candidateProfileSchema = new mongoose.Schema({
-    user: {
+    candidate: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Candidate',
         required: true,
         unique: true
     },
