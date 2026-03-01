@@ -580,7 +580,7 @@ const JobCard = ({ job, handleApply, isSaved, onToggleSave }: JobCardProps) => {
                 </button>
                 <button
                     onClick={(e) => { e.stopPropagation(); handleApply(job._id); }}
-                    className="bg-white text-[#0122c5] border-2 border-[#0122c5] hover:bg-[#0122c5] hover:text-white text-[13px] font-bold px-8 py-2 rounded-full transition-colors whitespace-nowrap shadow-sm hover:shadow-md outline-none focus:outline-none"
+                    className="bg-white text-[#0122c5] border border-[#0122c5] hover:bg-[#0122c5] hover:text-white text-[13px] font-semibold px-6 py-2 rounded-full transition-colors whitespace-nowrap shadow-sm hover:shadow-md outline-none focus:outline-none"
                 >
                     Apply Now
                 </button>
