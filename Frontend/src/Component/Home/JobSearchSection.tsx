@@ -13,6 +13,7 @@ interface Job {
     description?: string;
     refCode?: string;
     featured?: boolean;
+    domain?: string;
 }
 
 const JobSearchSection = () => {
@@ -45,15 +46,16 @@ const JobSearchSection = () => {
         location: ""
     });
 
-    // Hardcoded lists from original Figma / Repo for UI accuracy
-    const allDomain = [
-        "Advertising Technology", "Engineering", "Software Engineering", "AR/VR",
-        "Sales & Marketing", "Infrastructure", "Communications & Public Policy",
-        "Legal, Finance, Facilities & Admin", "Finance", "Design", "Data & Analytics",
-        "Artificial Intelligence", "Product", "Human Resources", "Marketing",
-        "Security", "Cloud & Infrastructure", "Sales", "Customer Experience",
-        "IT Support", "Support", "Leadership"
-    ];
+    const allDomain = useMemo(() => {
+        const domains = new Set<string>();
+        jobs.forEach(job => {
+            if (job.domain) {
+                domains.add(job.domain);
+            }
+        });
+        // Sort alphabetically
+        return Array.from(domains).sort();
+    }, [jobs]);
     const allTypes = ["Full time employment", "Part-time", "Internship", "Contract"];
 
     useEffect(() => {
@@ -176,9 +178,12 @@ const JobSearchSection = () => {
             const matchesLocation = !appliedFilters.location ||
                 job.location.toLowerCase().includes(appliedFilters.location.toLowerCase());
 
-            // Since DB doesn't have explicit domains yet, we just check against title/description string matches loosely
+            // Since DB now has domain, check against job.domain or fallback to loosely checking titles
             const matchesDomain = appliedFilters.domain.length === 0 ||
-                appliedFilters.domain.some((d: string) => job.title.toLowerCase().includes(d.toLowerCase()) || job.description?.toLowerCase().includes(d.toLowerCase()));
+                appliedFilters.domain.some((d: string) =>
+                    (job.domain && job.domain === d) ||
+                    (!job.domain && (job.title.toLowerCase().includes(d.toLowerCase()) || (job.description && job.description.toLowerCase().includes(d.toLowerCase()))))
+                );
 
             return matchesSearch && matchesType && matchesLocation && matchesDomain;
         });
@@ -561,6 +566,11 @@ const JobCard = ({ job, handleApply, isSaved, onToggleSave }: JobCardProps) => {
                     <span className="font-semibold text-gray-800">{job.company || 'Jobiffi HR'}</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
+                    {job.domain && (
+                        <span className="bg-blue-50 border border-blue-200 text-blue-700 px-3 py-1 rounded-[6px] text-[11px] font-bold tracking-wide uppercase">
+                            {job.domain}
+                        </span>
+                    )}
                     <span className="bg-gray-50 border border-gray-200 text-gray-700 px-3 py-1 rounded-[6px] text-[11px] font-bold tracking-wide uppercase">
                         {job.jobType}
                     </span>

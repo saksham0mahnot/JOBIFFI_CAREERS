@@ -6,6 +6,7 @@ import EmployeeDashboard from './Component/Dashboard/EmployeeDashboard'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import SocialAuthSuccess from './Component/Auth/SocialAuthSuccess'
+import MyApplication from './Component/MyApplication/MyApplication'
 
 // Protected Route Component
 const ProtectedRoute = ({ children, role }: { children: React.ReactNode, role: string }) => {
@@ -36,6 +37,12 @@ function App() {
                 <ProtectedRoute role="employee">
                   <EmployeeDashboard />
                 </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-application"
+              element={
+                <MyApplication />
               }
             />
             {/* Fallback */}

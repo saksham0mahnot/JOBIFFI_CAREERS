@@ -17,8 +17,22 @@ const EmployeeDashboard: React.FC = () => {
         description: '',
         salary: '',
         jobType: 'Full-time',
-        refCode: ''
+        refCode: '',
+        domain: 'Software Engineering'
     });
+
+    const domains = [
+        'Software Engineering',
+        'Marketing',
+        'Sales',
+        'Design',
+        'Product Management',
+        'Data Science',
+        'Human Resources',
+        'Finance',
+        'Operations',
+        'Customer Support'
+    ];
 
     useEffect(() => {
         fetchMyJobs();
@@ -59,7 +73,8 @@ const EmployeeDashboard: React.FC = () => {
                 description: '',
                 salary: '',
                 jobType: 'Full-time',
-                refCode: ''
+                refCode: '',
+                domain: 'Software Engineering'
             });
             fetchMyJobs();
             setActiveTab('jobs');
@@ -155,7 +170,7 @@ const EmployeeDashboard: React.FC = () => {
                                         <div key={job._id} className="p-5 border border-gray-100 rounded-2xl hover:border-blue-200 transition-all flex justify-between items-center group">
                                             <div>
                                                 <h3 className="text-lg font-bold text-gray-900">{job.title}</h3>
-                                                <p className="text-sm text-gray-500">{job.location} • {job.jobType}</p>
+                                                <p className="text-sm text-gray-500">{job.location} • {job.jobType} • {job.domain}</p>
                                             </div>
                                             <button
                                                 onClick={() => fetchApplications(job._id)}
@@ -204,6 +219,18 @@ const EmployeeDashboard: React.FC = () => {
                                         <option value="Part-time">Part-time</option>
                                         <option value="Contract">Contract</option>
                                         <option value="Internship">Internship</option>
+                                    </select>
+                                </div>
+                                <div className="col-span-2">
+                                    <label className="block text-sm font-bold text-gray-700 mb-2">Domain</label>
+                                    <select
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#0122c5] outline-none transition-all"
+                                        value={jobForm.domain}
+                                        onChange={e => setJobForm({ ...jobForm, domain: e.target.value })}
+                                    >
+                                        {domains.map(domain => (
+                                            <option key={domain} value={domain}>{domain}</option>
+                                        ))}
                                     </select>
                                 </div>
                                 <div className="col-span-2">

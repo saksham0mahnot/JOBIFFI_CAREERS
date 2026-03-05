@@ -42,6 +42,11 @@ const jobSchema = new mongoose.Schema({
         type: String,
         unique: true,
         sparse: true
+    },
+    domain: {
+        type: String,
+        required: [true, 'Please provide a domain'],
+        trim: true
     }
 }, {
     timestamps: true,
