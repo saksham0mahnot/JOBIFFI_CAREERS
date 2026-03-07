@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FiUser, FiUploadCloud, FiBriefcase, FiMail, FiPhone, FiMapPin, FiCamera } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import api from '../../api/serverApi';
 
 const MyApplication: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'applications' | 'profile'>('applications');
     const [user, setUser] = useState<any>(null);
+    const [applications, setApplications] = useState<any[]>([]);
+    const [loadingApps, setLoadingApps] = useState(false);
 
     // Profile Form State
     const [profileData, setProfileData] = useState({
@@ -31,7 +34,23 @@ const MyApplication: React.FC = () => {
                 console.error("Failed to parse user", e);
             }
         }
+        fetchMyApplications();
     }, []);
+
+    const fetchMyApplications = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        try {
+            setLoadingApps(true);
+            const res = await api.get('/applications/my');
+            setApplications(res.data);
+        } catch (error) {
+            console.error("Failed to fetch applications", error);
+        } finally {
+            setLoadingApps(false);
+        }
+    };
 
     const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setProfileData({ ...profileData, [e.target.name]: e.target.value });
@@ -50,12 +69,7 @@ const MyApplication: React.FC = () => {
         }
     };
 
-    // Mock Applications Data
-    const mockApplications = [
-        { id: 1, role: 'Frontend Developer', company: 'Google', status: 'Under Review', date: 'Oct 24, 2026' },
-        { id: 2, role: 'React Engineer', company: 'Microsoft', status: 'Interview', date: 'Oct 12, 2026' },
-        { id: 3, role: 'Full Stack Developer', company: 'Amazon', status: 'Applied', date: 'Oct 05, 2026' },
-    ];
+    // Real application logic has replaced mock applications data
 
     return (
         <div className="w-full bg-gray-50 min-h-screen py-8 px-4 sm:px-6 lg:px-8">
@@ -96,31 +110,41 @@ const MyApplication: React.FC = () => {
                                     <p className="text-gray-500 mt-1">Track and manage your job applications.</p>
                                 </div>
                                 <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-bold text-sm">
-                                    {mockApplications.length} Total
+                                    {applications.length} Total
                                 </div>
                             </div>
 
                             <div className="flex flex-col gap-4">
-                                {mockApplications.map(app => (
-                                    <div key={app.id} className="border border-gray-200 rounded-xl p-5 hover:border-blue-300 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white">
+                                {loadingApps ? (
+                                    <div className="text-gray-500 text-center py-8 animate-pulse font-medium">Loading your applications...</div>
+                                ) : applications.length === 0 ? (
+                                    <div className="text-gray-500 text-center py-10 bg-gray-50/50 rounded-xl border border-dashed border-gray-200">
+                                        <div className="text-gray-400 mb-2 flex justify-center"><FiBriefcase size={32} /></div>
+                                        <p className="font-medium text-gray-600">No applications found.</p>
+                                        <p className="text-sm mt-1">Start browsing jobs and apply to see them here.</p>
+                                    </div>
+                                ) : applications.map(app => (
+                                    <div key={app._id} className="border border-gray-200 rounded-xl p-5 hover:border-[#0122c5] hover:shadow-sm transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white cursor-pointer">
                                         <div className="flex items-start gap-4">
-                                            <div className="w-12 h-12 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
-                                                <span className="text-xl font-bold text-blue-700">{app.company.charAt(0)}</span>
+                                            <div className="w-12 h-12 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0">
+                                                <span className="text-xl font-bold text-[#0122c5]">{app.job?.company?.charAt(0) || 'J'}</span>
                                             </div>
                                             <div>
-                                                <h3 className="text-lg font-bold text-gray-900 mb-0.5">{app.role}</h3>
-                                                <p className="text-gray-500 font-medium text-sm">{app.company}</p>
+                                                <h3 className="text-lg font-bold text-gray-900 mb-0.5">{app.job?.title || 'Unknown Role'}</h3>
+                                                <p className="text-gray-500 font-medium text-sm">{app.job?.company || 'Unknown Company'}</p>
                                             </div>
                                         </div>
 
                                         <div className="flex flex-row md:flex-col justify-between items-center md:items-end md:gap-2 border-t md:border-none border-gray-100 pt-4 md:pt-0 mt-2 md:mt-0">
                                             <span className={`px-3 py-1 rounded-full text-xs font-bold ${app.status === 'Under Review' ? 'bg-yellow-100 text-yellow-700' :
                                                 app.status === 'Interview' ? 'bg-green-100 text-green-700' :
-                                                    'bg-gray-100 text-gray-700'
+                                                    app.status === 'Rejected' ? 'bg-red-100 text-red-700' :
+                                                        app.status === 'Hired' ? 'bg-indigo-100 text-indigo-700' :
+                                                            'bg-gray-100 text-gray-700'
                                                 }`}>
-                                                {app.status}
+                                                {app.status || 'Applied'}
                                             </span>
-                                            <span className="text-gray-400 text-xs font-medium">Applied: {app.date}</span>
+                                            <span className="text-gray-400 text-xs font-medium">Applied: {new Date(app.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                                         </div>
                                     </div>
                                 ))}

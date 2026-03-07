@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiSearch, FiSliders, FiChevronLeft, FiChevronRight, FiChevronDown, FiChevronUp, FiX, FiMapPin } from 'react-icons/fi';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import api from '../../api/serverApi';
@@ -17,6 +18,8 @@ interface Job {
 }
 
 const JobSearchSection = () => {
+    const navigate = useNavigate();
+
     // API State
     const [jobs, setJobs] = useState<Job[]>([]);
     const [savedJobIds, setSavedJobIds] = useState<string[]>([]);
@@ -86,26 +89,8 @@ const JobSearchSection = () => {
         }
     };
 
-    const handleApply = async (jobId: string) => {
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        if (!user.id) {
-            toast.error('Please login to apply');
-            return;
-        }
-        if (user.role === 'employee') {
-            toast.error('Employees cannot apply for jobs');
-            return;
-        }
-
-        try {
-            await api.post(`/applications/${jobId}`, {
-                resume: 'Link to resume in user profile',
-                coverLetter: 'Interested in this role'
-            });
-            toast.success('Successfully applied!');
-        } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Failed to apply');
-        }
+    const handleApply = (jobId: string) => {
+        navigate(`/job/${jobId}`);
     };
 
     const handleToggleSave = async (jobId: string) => {
@@ -555,7 +540,10 @@ interface JobCardProps {
 
 const JobCard = ({ job, handleApply, isSaved, onToggleSave }: JobCardProps) => {
     return (
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between group bg-white border border-gray-200 p-6 rounded-2xl hover:shadow-lg focus-within:border-[#0122c5] focus-within:shadow-lg transition-all duration-300 cursor-pointer">
+        <div
+            onClick={() => handleApply(job._id)}
+            className="flex flex-col lg:flex-row items-start lg:items-center justify-between group bg-white border border-gray-200 p-6 rounded-2xl hover:shadow-lg focus-within:border-[#0122c5] focus-within:shadow-lg transition-all duration-300 cursor-pointer"
+        >
             <div className="flex-1 lg:pr-6 mb-4 lg:mb-0 w-full">
                 <h3 className="text-[17px] font-bold text-gray-900 mb-1.5 leading-tight cursor-pointer hover:underline">
                     {job.title}
@@ -592,7 +580,7 @@ const JobCard = ({ job, handleApply, isSaved, onToggleSave }: JobCardProps) => {
                     onClick={(e) => { e.stopPropagation(); handleApply(job._id); }}
                     className="bg-white text-[#0122c5] border-2 border-[#0122c5] hover:bg-[#0122c5] hover:text-white text-[13px] font-bold px-8 py-2 rounded-full transition-colors whitespace-nowrap shadow-sm hover:shadow-md outline-none focus:outline-none"
                 >
-                    Apply Now
+                    Apply
                 </button>
             </div>
         </div>
